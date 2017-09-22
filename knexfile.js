@@ -3,24 +3,25 @@ module.exports = {
   development: {
     client: 'postgresql',
     connection: {
-      // filename: './dev.sqlite3'
+      database: 'job_queue',
+      user: 'meghan',
+      password: 'jobs',
+      host: 'postgres',
     }
   },
 
   test: {
     client: 'postgresql',
     connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
+      database: 'job_queue_test',
+      user:     'meghan',
+      password: 'jobs',
+      host: 'postgres_test'
     },
     pool: {
       min: 2,
       max: 10
     },
-    migrations: {
-      tableName: 'jobs'
-    }
   },
 
   production: {
