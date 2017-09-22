@@ -19,13 +19,13 @@ services:
     volumes:
       - ./.data:/var/lib/postgresql/data
     environment:
-      POSTGRES_DB:
-      POSTGRES_USER: 
-      POSTGRES_PASSWORD:
+      POSTGRES_DB: job_queue
+      POSTGRES_USER: meghan
+      POSTGRES_PASSWORD: jobs
 
   postgres_test:
     image: postgres:9.6.2-alpine
     environment:
-      POSTGRES_DB:
-      POSTGRES_USER:
-      POSTGRES_PASSWORD:
+      POSTGRES_DB: job_queue_test
+      POSTGRES_USER: meghan
+      POSTGRES_PASSWORD: jobs
