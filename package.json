@@ -7,7 +7,8 @@
     "body-parser": "1.18.1",
     "express": "4.15.4",
     "knex": "0.13.0",
-    "pg": "7.3.0"
+    "pg": "7.3.0",
+    "request": "2.82.0"
   },
   "devDependencies": {
     "chai": "4.1.2",
@@ -17,7 +18,8 @@
   },
   "scripts": {
     "start": "sh ./scripts/start",
-    "test": "mocha"
+    "test": "mocha",
+    "knex": "knex"
   },
   "repository": {
     "type": "git",
