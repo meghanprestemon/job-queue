@@ -3,7 +3,6 @@ process.env.NODE_ENV = 'test';
 const assert = require('chai').assert;
 const { suite, test } = require('mocha');
 const knex = require('../knex');
-// const { addDatabaseHooks } = require('./utils');
 
 suite('migrations', () => {
   test('jobs columns', (done) => {
@@ -32,10 +31,10 @@ suite('migrations', () => {
           },
 
           status: {
-            type: 'boolean',
+            type: 'integer',
             maxLength: null,
             nullable: false,
-            defaultValue: 'false',
+            defaultValue: '0',
           },
 
           created_at: {

@@ -4,7 +4,7 @@ exports.up = knex =>
     table.increments('id').primary();
     table.string('url', 255).notNullable();
     table.text('response');
-    table.boolean('status').notNullable().defaultTo(false);
+    table.integer('status').notNullable().defaultTo(0);
     table.timestamps(true, true);
   });
 
