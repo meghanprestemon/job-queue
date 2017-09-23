@@ -6,6 +6,7 @@ const app = express();
 app.use(bodyParser.json());
 
 const jobs = require('./routes/jobs');
+
 app.use('/jobs', jobs);
 
 const port = process.env.PORT || 8000;

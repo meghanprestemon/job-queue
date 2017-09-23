@@ -12,14 +12,18 @@
   },
   "devDependencies": {
     "chai": "4.1.2",
+    "eslint": "4.7.2",
+    "eslint-config-airbnb-base": "12.0.0",
+    "eslint-plugin-import": "2.7.0",
     "mocha": "3.5.3",
     "nodemon": "1.12.1",
     "supertest": "3.0.0"
   },
   "scripts": {
+    "knex": "knex",
+    "lint": "NODE_ENV=dev docker-compose run api ./node_modules/.bin/eslint --fix .",
     "start": "sh ./scripts/start",
-    "test": "mocha",
-    "knex": "knex"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",

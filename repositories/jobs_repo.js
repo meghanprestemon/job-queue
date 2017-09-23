@@ -8,7 +8,7 @@ class JobsRepository {
 
   static addResponse(id, response, status) {
     return knex('jobs')
-      .where({ id: id })
+      .where({ id })
       .update({ response, status });
   }
 

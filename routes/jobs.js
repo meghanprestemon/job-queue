@@ -1,3 +1,5 @@
+/* eslint-disable consistent-return */
+
 const express = require('express');
 const JobsRepository = require('../repositories/jobs_repo');
 const request = require('request');
@@ -5,21 +7,21 @@ const request = require('request');
 const router = express.Router();
 
 router.post('/', (req, res) => {
-  const url = req.body.url;
+  const { url } = req.body;
 
   if (!url) {
     return res.status(404).send({ url: 'undefined' });
   }
 
   JobsRepository.createEntry(url)
-    .then(entry => {
+    .then((entry) => {
       request(`${url}`, (error, response, body) => {
         if (error) {
           JobsRepository.addResponse(entry[0].id, body, 404)
-            .then((updatedEntry) => updatedEntry);
+            .then(updatedEntry => updatedEntry);
         } else {
           JobsRepository.addResponse(entry[0].id, body, 200)
-            .then((updatedEntry) => updatedEntry);
+            .then(updatedEntry => updatedEntry);
         }
       });
       res.status(200).send({ id: entry[0].id });
@@ -31,18 +33,18 @@ router.post('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
 
   if (!id) {
-    return res.status(404).send({ id: undefined })
+    return res.status(404).send({ id: undefined });
   }
 
   JobsRepository.getJobData(id)
-    .then(entry => {
+    .then((entry) => {
       if (entry.status) {
         res.status(200).send({
           status: entry.status,
-          result: entry.response
+          result: entry.response,
         });
       } else {
         res.status(202).send({ status: '202 - fetching result' });

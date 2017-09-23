@@ -1,11 +1,10 @@
-/* eslint-disable no-undef, consistent-return */
+/* eslint-disable consistent-return */
 
 process.env.NODE_ENV = 'test';
 
 const { suite, test } = require('mocha');
 const request = require('supertest');
 const server = require('../index');
-const knex = require('../knex');
 
 suite('jobs routes', () => {
   test('POST /jobs', (done) => {
@@ -13,7 +12,7 @@ suite('jobs routes', () => {
       .post('/jobs')
       .set('Accept', 'application/json')
       .send({
-        url: 'https://www.wikipedia.org'
+        url: 'https://www.wikipedia.org',
       })
       .expect('Content-Type', /json/)
       .expect(200, { id: 5 }, done);
@@ -24,7 +23,7 @@ suite('jobs routes', () => {
       .post('/jobs')
       .set('Accept', 'application/json')
       .send({
-        url: null
+        url: null,
       })
       .expect('Content-Type', /json/)
       .expect(404, { url: 'undefined' }, done);
@@ -37,7 +36,7 @@ suite('jobs routes', () => {
       .expect('Content-Type', /json/)
       .expect(200, {
         status: 200,
-        result: ''
+        result: '',
       }, done);
   });
 
@@ -56,7 +55,7 @@ suite('jobs routes', () => {
       .expect('Content-Type', /json/)
       .expect(200, {
         status: 404,
-        result: 'error'
+        result: 'error',
       }, done);
   });
 });

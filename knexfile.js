@@ -7,20 +7,20 @@ module.exports = {
       user: 'meghan',
       password: 'jobs',
       host: 'postgres',
-    }
+    },
   },
 
   test: {
     client: 'postgresql',
     connection: {
       database: 'job_queue_test',
-      user:     'meghan',
+      user: 'meghan',
       password: 'jobs',
-      host: 'postgres_test'
+      host: 'postgres_test',
     },
     pool: {
       min: 2,
-      max: 10
+      max: 10,
     },
   },
 
