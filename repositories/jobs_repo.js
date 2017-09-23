@@ -1,18 +1,20 @@
 const knex = require('../knex');
 
 class JobsRepository {
-  static createEntry(url, response, status) {
+  static createEntry(url) {
     return knex('jobs')
-      .insert({
-        url,
-        response,
-        status,
-      }, '*');
+      .insert({ url }, '*');
   }
 
-  static getJobData(url) {
+  static addResponse(id, response, status) {
     return knex('jobs')
-      .where({ url })
+      .where({ id: id })
+      .update({ response, status });
+  }
+
+  static getJobData(id) {
+    return knex('jobs')
+      .where({ id })
       .first();
   }
 }

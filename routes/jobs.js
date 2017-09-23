@@ -6,16 +6,18 @@ const router = express.Router();
 
 router.post('/', (req, res) => {
   const url = req.body.url;
-  const response = request(`${url}`, (error, response, body) => body);
-  const status = response ? true : false;
 
   if (!url) {
     return res.status(404).send({ url: undefined });
   }
 
-  JobsRepository.createEntry(url, response, status)
+  JobsRepository.createEntry(url)
     .then(entry => {
-      res.status(200).send(entry[0]);
+      request(`${url}`, (error, response, body) => {
+        JobsRepository.addResponse(entry[0].id, body, true)
+        .then((updatedEntry) => updatedEntry);
+      });
+      res.status(200).send({ id: entry[0].id });
     })
     .catch((err) => {
       res.setHeader('Content-Type', 'application/json');
@@ -23,11 +25,25 @@ router.post('/', (req, res) => {
     });
 });
 
-router.get('/', (req, res) => {
-  const url = req.body.url;
+router.get('/:id', (req, res) => {
+  const id = req.params.id;
 
-  JobsRepository.getJobData(url)
+  if (!id) {
+    return res.status(404).send({ id: undefined })
+  }
 
+  JobsRepository.getJobData(id)
+    .then(entry => {
+      if (entry.status) {
+        res.status(200).send(entry.response);
+      } else {
+        res.status(200).send({ status: 'fetching result' });
+      }
+    })
+    .catch((err) => {
+      res.setHeader('Content-Type', 'application/json');
+      res.status(500).send(err);
+    });
 });
 
 module.exports = router;

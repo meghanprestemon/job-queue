@@ -35,7 +35,7 @@ suite('migrations', () => {
             type: 'boolean',
             maxLength: null,
             nullable: false,
-            defaultValue: null,
+            defaultValue: 'false',
           },
 
           created_at: {
